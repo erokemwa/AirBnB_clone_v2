@@ -9,6 +9,7 @@ import os
 
 env.hosts = ['100.26.142.215', '100.26.174.154']
 
+
 def do_deploy(archive_path):
     """
     Deploys an archive to the web servers
@@ -26,7 +27,8 @@ def do_deploy(archive_path):
         put(archive_path, "/tmp/")
 
         # Create the directory where the code will be deployed
-        run("sudo mkdir -p /data/web_static/releases/{}/".format(archive_name_no_ext))
+        run("sudo mkdir -p /data/web_static/releases/{}/"
+            .format(archive_name_no_ext))
 
         # Uncompress the archive into the deployment folder
         run("sudo tar -xzf /tmp/{} -C /data/web_static/releases/{}/"
@@ -37,16 +39,18 @@ def do_deploy(archive_path):
 
         # Move the files to a new folder and delete the old symbolic link
         run("sudo mv /data/web_static/releases/{}/web_static/* \
-            /data/web_static/releases/{}/".format(archive_name_no_ext, archive_name_no_ext))
-        run("sudo rm -rf /data/web_static/releases/{}/web_static".format(archive_name_no_ext))
+            /data/web_static/releases/{}/"
+            .format(archive_name_no_ext, archive_name_no_ext))
+        run("sudo rm -rf /data/web_static/releases/{}/web_static"
+            .format(archive_name_no_ext))
 
         # Delete the old symbolic link and create a new one
         run("sudo rm -rf /data/web_static/current")
-        run("sudo ln -s /data/web_static/releases/{}/ /data/web_static/current".format(archive_name_no_ext))
+        run("sudo ln -s /data/web_static/releases/{}/ \
+                /data/web_static/current".format(archive_name_no_ext))
 
         return True
 
-    except:
+    except Exception as e:
         # If there is an error, return False
         return False
-
