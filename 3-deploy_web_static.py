@@ -32,8 +32,7 @@ def do_deploy(archive_path):
         run("sudo ln -s {}{}/ /data/web_static/current".format(path, name))
         run('echo "New version deployed!"')
         return True
-    except BaseException:
-        # run('echo "wahala!"')
+    except Exception as e:
         return False
 
 
