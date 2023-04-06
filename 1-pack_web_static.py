@@ -14,11 +14,12 @@ def do_pack():
         If the archive is created successfully, the path to the archive file
         is returned. Otherwise, None is returned.
     """
+
     # Format the date and time as a string that can be used in the filename
-    timestamp = cur_time.strftime("%Y%m%d%H%M%S")
+    cur_time = datetime.now().strftime("%Y%m%d%H%M%S")
 
     # Define the filename of the archive file
-    archive_filename = "versions/web_static_{}.tgz".format(timestamp)
+    archive_filename = "versions/web_static_{}.tgz".format(cur_time)
 
     try:
         # Create the versions directory if it doesn't exist
@@ -30,7 +31,7 @@ def do_pack():
         # If the archive is created successfully, return the path to the file
         return archive_filename
 
-    except Exception as e:
+    except BaseException:
         # If an error occurs during the process of creating the archive file,
         # return None to indicate that something went wrong.
         return None
