@@ -3,9 +3,11 @@
 
 html="
 <html>
-    <body>
-        <p>Test run!</p>
-    </body>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
 </html>
 "
 sudo apt-get -y update
