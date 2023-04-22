@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" 
+"""
 a script starts Flask web app
 """
 
