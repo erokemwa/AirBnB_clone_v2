@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-script starts Flask web app
+a script starts Flask web app
 """
 
 from flask import Flask, render_template
@@ -21,14 +21,14 @@ def hbnb():
 
 
 @app.route("/c/<text>", strict_slashes=False)
-def cisfun(text):
+def c_is_fun(text):
     """returns C followed by a formated text value"""
     return 'C ' + text.replace('_', ' ')
 
 
 @app.route('/python/', strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
-def pyiscool(text="is cool"):
+def py_is_cool(text="is cool"):
     """ returns Python, followed by the value of the text variable"""
     return 'Python ' + text.replace('_', ' ')
 
@@ -42,7 +42,7 @@ def is_number(n):
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def temp_number(n):
     """returns a HTML page only if n is an integer”"""
-    return temp_number("5-number.html", n=n)
+    return template("5-number.html", n=n)
 
 
 if __name__ == "__main__":
