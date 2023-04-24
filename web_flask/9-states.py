@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+""" a Script that runs a Flask app """
+from flask import Flask, render_template
+from models import storage
+from models.state import State
+
+app = Flask(__name__)
+
+
+@app.teardown_appcontext
+def closing(error):
+    """a func that closes session """
+    storage.close()
+
+
+@app.route('/states', strict_slashes=False)
+def states():
+    """ a function that list states"""
+    state = storage.all(State)
+    return render_template('9-states.html', state=state)
+
+
+@app.route('/states/<id>', strict_slashes=False)
+def state_id(id):
+    """ a function that list a state by id"""
+    state = storage.all(State)
+    return render_template('9-states.html', state=state, id=id)
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
